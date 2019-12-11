@@ -13,23 +13,29 @@ namespace BookStoreExercism
             {
                 return basket.Length * 8 * 1.00;
             }
-            else if (basket.Length == 4)
+            if (basket.Length == 5)
             {
                 return basket.Length * CostOfBook() * Discount(basket.Length);
             }
-            else if (basket.Length == 3)
+            if (basket.Length == 4)
             {
                 return basket.Length * CostOfBook() * Discount(basket.Length);
             }
-            else
+            if (basket.Length == 3)
             {
                 return basket.Length * CostOfBook() * Discount(basket.Length);
             }
-            
+
+            return basket.Length * CostOfBook() * Discount(basket.Length);
+
         }
 
         private double Discount(int numberOfBooks)
         {
+            if (numberOfBooks == 5)
+            {
+                return .75;
+            }
             if (numberOfBooks == 4)
             {
                 return .80;
