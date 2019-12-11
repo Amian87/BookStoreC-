@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace BookStoreExercism
 {
@@ -11,12 +12,20 @@ namespace BookStoreExercism
             if (CheckIfBasketHasDistinctBooksOrIsEmpty(basket))
             {
                 return basket.Length * 8;
-
+            }
+            else if (basket.Length == 4)
+            {
+                return (basket.Length * 8) * 0.8;
+            }
+            else if (basket.Length == 2)
+            {
+                return (basket.Length * 8) * 0.9;
             }
             else
             {
-                return  15.2;
+                return (basket.Length * 8) * 0.95;
             }
+            
         }
 
         private static bool CheckIfBasketHasDistinctBooksOrIsEmpty(int[] basket)
