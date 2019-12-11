@@ -9,44 +9,53 @@ namespace BookStoreExercism
     {
         public double CalculateTotal(int[] basket)
         {
-            if (CheckIfBasketHasDistinctBooksOrIsEmpty(basket))
-            {
-                return basket.Length * 8 * 1.00;
-            }
-            if (basket.Length == 5)
-            {
-                return basket.Length * CostOfBook() * Discount(basket.Length);
-            }
-            if (basket.Length == 4)
-            {
-                return basket.Length * CostOfBook() * Discount(basket.Length);
-            }
-            if (basket.Length == 3)
-            {
-                return basket.Length * CostOfBook() * Discount(basket.Length);
-            }
+            return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
 
-            return basket.Length * CostOfBook() * Discount(basket.Length);
+            //if (CheckIfBasketHasDistinctBooksOrIsEmpty(basket))
+            //{
+            //    return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
+            //}
+            //if (basket.Length == 5)
+            //{
+            //    return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
+            //}
+            //if (basket.Length == 4)
+            //{
+            //    return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
+            //}
+            //if (basket.Length == 3)
+            //{
+            //    return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
+            //}
+
+            //return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
 
         }
 
-        private double Discount(int numberOfBooks)
+        private static int NumberOfDistinctBooks(int[] basket) => basket.ToList().Distinct().Count();
+
+        private double Discount(int numberOfUniqueBooks)
         {
-            if (numberOfBooks == 5)
+            if (numberOfUniqueBooks == 5)
             {
                 return .75;
             }
-            if (numberOfBooks == 4)
+            if (numberOfUniqueBooks == 4)
             {
                 return .80;
             }
 
-            if (numberOfBooks == 3)
+            if (numberOfUniqueBooks == 3)
             {
                 return .90;
             }
 
-            return 0.95;
+            if (numberOfUniqueBooks == 2)
+            {
+                return 0.95;
+            }
+
+            return 1.00;
         }
 
 

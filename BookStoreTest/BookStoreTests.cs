@@ -62,5 +62,12 @@ namespace BookStoreTest
             var basket = new int[] { 1, 2, 3, 4, 5 };
             Assert.AreEqual(30.0, bookStore.CalculateTotal(basket));
         }
+
+        //[Test]
+        //public void CostOfTwoSameBookAndFiveDifferentBooks()
+        //{
+        //    var basket = new int[] { 1, 1, 2, 3, 4, 5 };
+        //    Assert.AreEqual(30.0, bookStore.CalculateTotal(basket));
+        //}
     }
 }
