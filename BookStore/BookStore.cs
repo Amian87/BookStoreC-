@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualBasic.CompilerServices;
+﻿using System.Linq;
 
 namespace BookStoreExercism
 {
@@ -9,30 +6,28 @@ namespace BookStoreExercism
     {
         public double CalculateTotal(int[] basket)
         {
-            return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
+            double totalCost = 0;
 
-            //if (CheckIfBasketHasDistinctBooksOrIsEmpty(basket))
-            //{
-            //    return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
-            //}
-            //if (basket.Length == 5)
-            //{
-            //    return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
-            //}
-            //if (basket.Length == 4)
-            //{
-            //    return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
-            //}
-            //if (basket.Length == 3)
-            //{
-            //    return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
-            //}
+            var  uniqueBooks = basket.ToList().Distinct();
 
-            //return basket.Length * CostOfBook() * Discount(NumberOfDistinctBooks(basket));
+            var duplicateBooks =    basket.ToList().GroupBy(x => x)
+                                          .Where(group => group.Count() > 1)
+                                          .Select(group => group.Key);
+
+            if (uniqueBooks.Any())
+            {
+                totalCost = uniqueBooks.Count() * CostOfBook() * Discount(uniqueBooks.Count());
+            }
+
+            if (duplicateBooks.Any())
+            {
+                totalCost += duplicateBooks.Count() * CostOfBook() * Discount(duplicateBooks.Count());
+            }
+            return totalCost;
 
         }
 
-        private static int NumberOfDistinctBooks(int[] basket) => basket.ToList().Distinct().Count();
+        //private static int NumberOfDistinctBooks(int[] basket) => basket.ToList().Distinct().Count();
 
         private double Discount(int numberOfUniqueBooks)
         {
@@ -64,9 +59,5 @@ namespace BookStoreExercism
             return 8;
         } 
 
-        private bool CheckIfBasketHasDistinctBooksOrIsEmpty(int[] basket)
-        {
-            return basket.ToList().Distinct().Count() == 1 || basket.Length == 0;
-        }
     }
 }
